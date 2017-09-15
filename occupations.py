@@ -9,12 +9,12 @@ HW3 -- StI/O: Divine your Destiny!
 
 from __future__ import print_function
 
+__authors__ = ['Khyber Sen', 'Shannon Lau']
+__date__ = '2017-09-14'
+
 import random
 
 from collections import Counter
-
-__authors__ = ['Khyber Sen', 'Shannon Lau']
-__date__ = '2017-09-14'
 
 
 def _percentages(self):
@@ -36,6 +36,7 @@ class Occupations(object):
     """
     :cvar DEFAULT_SAMPLE_SIZE: int
     :cvar UNITED_STATES_FILE: str
+    :cvar __UNITED_STATES: Occupations
 
     :ivar occupations: list[tuple[str, float]]
     :ivar total_percent: float
@@ -44,6 +45,8 @@ class Occupations(object):
     DEFAULT_SAMPLE_SIZE = 1000000
 
     UNITED_STATES_FILE = 'occupations.csv'
+
+    __UNITED_STATES = None  # lazy
 
     @staticmethod
     def parse_line(line):
@@ -124,12 +127,14 @@ class Occupations(object):
     @staticmethod
     def in_united_states():
         """
-        Creates an Occupations from 'occupations.csv',
+        Gets an Occupations singleton from 'occupations.csv',
         which contains occupation data from the United States.
-        :return: an Occupations for the United States
+        :return: an Occupations singleton for the United States
         """
         # type: () -> Occupations
-        return Occupations(Occupations.UNITED_STATES_FILE)
+        if Occupations.__UNITED_STATES is None:
+            Occupations.__UNITED_STATES = Occupations(Occupations.UNITED_STATES_FILE)
+        return Occupations.__UNITED_STATES
 
     @staticmethod
     def test(sample_size=DEFAULT_SAMPLE_SIZE, debug=True):

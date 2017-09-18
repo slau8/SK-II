@@ -164,9 +164,26 @@ def test(sample_size=Occupations.DEFAULT_SAMPLE_SIZE, debug=True):
 
 def main():
     """
-    Run test for sample sizes from 1e2 to 1e6 in powers of 10
+    Return random occupation
     """
     # type: () ->
+    try:
+        option = int(raw_input("0: Generate your future occupation. \n1: Test the accuracy of this generator. \nINPUT 0 OR 1: ").strip())
+        if option == 0:
+            Occupations.in_united_states().random_occupation()
+        elif option == 1:
+            return_test()
+        else:
+            return
+            print("Invalid entry.")
+    except:
+        print("Invalid entry.")
+
+
+def return_test():
+    """
+    Run test for sample sizes from 1e2 to 1e6 in powers of 10
+    """
     million = True
     while True:
         for i in xrange(2, (6 if million else 5) + 1):

@@ -174,7 +174,6 @@ def main():
         elif option == 1:
             return_test()
         else:
-            return
             print("Invalid entry.")
     except:
         print("Invalid entry.")
